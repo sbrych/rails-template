@@ -1,14 +1,4 @@
-# mattbrictson/rails-template
-
-## Description
-
-This is the application template that I use for my Rails 5.2 projects. As a freelance Rails developer, I need to be able to start new projects quickly and with a good set of defaults. I've assembled this template over the years to include best-practices, tweaks, documentation, and personal preferences, while still generally adhering to the "Rails way".
-
-For older versions of Rails, use these branches:
-
-* [Rails 4.2.x](https://github.com/mattbrictson/rails-template/tree/rails-42)
-* [Rails 5.0.x](https://github.com/mattbrictson/rails-template/tree/rails-50)
-* [Rails 5.1.x](https://github.com/mattbrictson/rails-template/tree/rails-51)
+# sbrych/rails-template (fork of mattbrictson/rails-template)
 
 ## Requirements
 
@@ -16,9 +6,6 @@ This template currently works with:
 
 * Rails 5.2.x
 * PostgreSQL
-* chromedriver
-
-If you need help setting up a Ruby development environment, check out my [Rails OS X Setup Guide](https://mattbrictson.com/rails-osx-setup-guide).
 
 ## Installation
 
@@ -28,23 +15,17 @@ To make this the default Rails application template on your system, create a `~/
 
 ```
 -d postgresql
--m https://raw.githubusercontent.com/mattbrictson/rails-template/master/template.rb
+-m https://raw.githubusercontent.com/sbrych/rails-template/master/template.rb
 ```
 
 ## Usage
-
-This template assumes you will store your project in a remote git repository (e.g. Bitbucket or GitHub) and that you will deploy to staging and production environments. It will prompt you for this information in order to pre-configure your app, so be ready to provide:
-
-1. The git URL of your (freshly created and empty) Bitbucket/GitHub repository
-2. The hostname of your staging server
-3. The hostname of your production server
 
 To generate a Rails application using this template, pass the `-m` option to `rails new`, like this:
 
 ```
 rails new blog \
   -d postgresql \
-  -m https://raw.githubusercontent.com/mattbrictson/rails-template/master/template.rb
+  -m https://raw.githubusercontent.com/sbrych/rails-template/master/template.rb
 ```
 
 *Remember that options must go after the name of the application.* The only database supported by this template is `postgresql`.
@@ -62,15 +43,13 @@ The template will perform the following steps:
 1. Generate your application files and directories
 2. Ensure bundler is installed
 3. Create the development and test databases
-4. Commit everything to git
-5. Push the project to the remote git repository you specified
 
 ## What is included?
 
 #### These gems are added to the standard Rails stack
 
 * Core
-    * [active_type][] – for building simple and effective form/service objects
+    * ~~[active_type][] – for building simple and effective form/service objects~~
     * [sidekiq][] – Redis-based job queue implementation for Active Job
 * Configuration
     * [dotenv][] – in place of the Rails `secrets.yml`
@@ -83,20 +62,11 @@ The template will perform the following steps:
     * [livereload][] – magically refreshes browsers whenever you save a file
     * [rubocop][] – enforces Ruby code style
     * [xray-rails][] – inspect view partials in the browser
-* Deployment via Capistrano (optional)
-    * [capistrano-mb][] – capistrano recipes
-    * [unicorn][] – the industry-standard Rails server
-    * [unicorn-worker-killer][] – to manage memory use
 * Security
     * [brakeman][] and [bundler-audit][] – detect security vulnerabilities
 * Testing
-    * [mocha][] – excellent mocking for Test::Unit/Minitest
     * [simplecov][] – code coverage reports
     * [shoulda][] – shortcuts for common ActiveRecord tests
-
-#### Postmark
-
-I like to use [Postmark][] for transactional email, and so I've included the [postmark-rails][] gem and configured it in `environments/production.rb`. Make sure to sign up for a Postmark account to get an API key, or switch to your own preferred email provider before deploying your app.
 
 #### Bootstrap integration (optional)
 
@@ -114,13 +84,12 @@ I like to use [Postmark][] for transactional email, and so I've included the [po
 #### Plus lots of documentation for your project
 
 * `README.md`
-* `PROVISIONING.md` and `DEPLOYMENT.md` for Capistrano (optional)
 
 ## How does it work?
 
 This project works by hooking into the standard Rails [application templates][] system, with some caveats. The entry point is the [template.rb][] file in the root of this repository.
 
-Normally, Rails only allows a single file to be specified as an application template (i.e. using the `-m <URL>` option). To work around this limitation, the first step this template performs is a `git clone` of the `mattbrictson/rails-template` repository to a local temporary directory.
+Normally, Rails only allows a single file to be specified as an application template (i.e. using the `-m <URL>` option). To work around this limitation, the first step this template performs is a `git clone` of the `sbrych/rails-template` repository to a local temporary directory.
 
 This temporary directory is then added to the `source_paths` of the Rails generator system, allowing all of its ERb templates and files to be referenced when the application template script is evaluated.
 
@@ -137,7 +106,6 @@ Rails generators are very lightly documented; what you’ll find is that most of
 [livereload]:https://github.com/guard/guard-livereload
 [rubocop]:https://github.com/bbatsov/rubocop
 [xray-rails]:https://github.com/brentd/xray-rails
-[capistrano-mb]:https://github.com/mattbrictson/capistrano-mb
 [unicorn]:http://unicorn.bogomips.org
 [unicorn-worker-killer]:https://github.com/kzk/unicorn-worker-killer
 [Postmark]:http://postmarkapp.com

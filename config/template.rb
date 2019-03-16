@@ -5,12 +5,6 @@ copy_file "config/puma.rb", force: true
 remove_file "config/secrets.yml"
 copy_file "config/sidekiq.yml"
 
-if apply_capistrano?
-  template "config/deploy.rb.tt"
-  template "config/deploy/production.rb.tt"
-  template "config/deploy/staging.rb.tt"
-end
-
 gsub_file "config/routes.rb", /  # root 'welcome#index'/ do
   '  root "home#index"'
 end
@@ -28,7 +22,6 @@ end
 apply "config/environments/development.rb"
 apply "config/environments/production.rb"
 apply "config/environments/test.rb"
-template "config/environments/staging.rb.tt"
 
 route 'root "home#index"'
 route %Q(mount Sidekiq::Web => "/sidekiq" # monitoring console\n)
