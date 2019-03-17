@@ -29,7 +29,6 @@ def apply_template!
   apply "config/template.rb"
   apply "doc/template.rb"
   apply "lib/template.rb"
-  # apply "test/template.rb"
   apply "spec/template.rb"
 
   apply "variants/bootstrap/template.rb" if apply_bootstrap?
